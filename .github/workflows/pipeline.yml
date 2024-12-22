@@ -26,3 +26,17 @@ jobs:
       uses: aws-actions/amazon-ecr-login@v2
       with:
         mask-password: 'false'
+
+    - name: Construir imagen docker
+      run: docker build -t 515966540576.dkr.ecr.us-east-1.amazonaws.com/pruebadevops:latest
+
+    - name: Push imagen a ECR
+      run: docker push 515966540576.dkr.ecr.us-east-1.amazonaws.com/pruebadevops:latest
+
+    - name: Actualizar imagen nueva a ECS
+      run: |
+        aws ecs update-service \
+          --cluster ${{ vars.ECS_CLUSTER }} \
+          --service ${{ vars.ECS_SERVICE }} \
+          --force-new-deployment \
+          --region ${{ vars.AWS_REGION }}
