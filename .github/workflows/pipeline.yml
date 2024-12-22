@@ -28,7 +28,7 @@ jobs:
         mask-password: 'false'
 
     - name: Construir imagen docker
-      run: docker build -t 515966540576.dkr.ecr.us-east-1.amazonaws.com/pruebadevops:latest
+      run: docker build -t 515966540576.dkr.ecr.us-east-1.amazonaws.com/pruebadevops:latest .
 
     - name: Push imagen a ECR
       run: docker push 515966540576.dkr.ecr.us-east-1.amazonaws.com/pruebadevops:latest
